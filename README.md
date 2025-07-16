@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+هادي خلاصة بالدارجة على **`page.tsx`**, **`layout.tsx`**، و\*\*`not-found.tsx`\*\* فـ Next.js، اللي هدرتي عليهم فالميت:
 
-## Getting Started
+---
 
-First, run the development server:
+🔹 **`page.tsx`**
+هاد الفايل هو اللي كيحكم فالمحتوى ديال الصفحة. مثلا إلا درتي `/about/page.tsx`، راه هادشي اللي غادي يبان فـ `/about` URL. هو المسؤول على الرندر ديال الصفحة.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+✳️ **مثال**:
+
+```tsx
+export default function AboutPage() {
+  return <h1>مرحبا بكم فـ صفحة About</h1>;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🔹 **`layout.tsx`**
+هاد الفايل كيتستعمل باش دير structure مشترك بين بزاف ديال الصفحات، بحال الـ header, footer، و navigation.
+تقدر تدير `layout.tsx` فشي فولدر (مثلا `about/layout.tsx`) وغادي يطبق غير على الصفحات اللي داخل `about/`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✳️ **مثال**:
 
-## Learn More
+```tsx
+export default function AboutLayout({ children }) {
+  return (
+    <div>
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🔹 **`not-found.tsx`**
+هاد الفايل كيتعرض إلا كانت شي صفحة ما كايناش (404). مثلا دخل شي واحد لـ `/about/xyz` وماكيناش، غادي يتعرض `not-found.tsx`.
+تقدر تديرو فـ root ولا فـ شي route-specific directory.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+✳️ **مثال**:
 
-## Deploy on Vercel
+```tsx
+export default function NotFound() {
+  return <p>الصفحة ما لقيتهاش 🙁</p>;
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📌 **الخلاصة**:
+
+| الفايل          | الدور ديالو                                       |
+| --------------- | ------------------------------------------------- |
+| `page.tsx`      | كيعرض محتوى ديال صفحة معينة                       |
+| `layout.tsx`    | كيعطي شكل عام مشترك للصفحات (header, footer, ...) |
+| `not-found.tsx` | كيتعرض ملي المستخدم يمشي لشي route ما كايناش      |
+
+إلا بغيتي نزيد شي أمثلة ولا نشرح بلغة تقنية أكثر، غير قولها.
